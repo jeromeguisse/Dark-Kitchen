@@ -1,0 +1,635 @@
+body{
+    margin: 0 auto;
+    padding: 0;
+    background-color: #F8F5ED;
+    max-width: 1240px;
+}
+
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-mode .card {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode .specific-class {
+    color: #fff; /* Ensure all headings and specific classes have the correct text color in dark mode */
+}
+
+/* Dark mode styles */
+body.dark-mode #dishDetails {
+    color: #fff; /* Text color in dark mode */
+    background-color: #333; /* Background color in dark mode */
+}
+
+/* General */
+
+h1{
+    font-family: 'Panton Rust Heavy', sans-serif;
+    font-weight: 100;
+}
+
+/* Header */
+
+header {
+    display: grid;
+    grid-template-columns: 180px 1fr 640px;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: center;
+    max-height: 180px;
+}
+
+header .logo {
+    grid-column: 1;
+    grid-row: 1/4;
+}
+
+header .logo img {
+    border-radius: 30%;
+}
+
+header h1{
+    grid-column: 3;
+    grid-row: 2;
+    text-align: right;
+    padding: 0;
+    margin: 0;
+    align-self: end;
+}
+
+header h2{
+    grid-column: 3;
+    grid-row: 3;
+    font-family: 'Port Lligat Sans', sans-serif;
+    font-weight: 100;
+    text-align: right;
+    color: #827878;
+}
+
+.hamburger {
+    max-width: 40px;
+}
+
+#cart{
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.cart {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    background-color: #747474;
+    box-shadow: -4px 0 10px rgba(0,0,0,0.5);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    font-family: 'Port Lligat Sans', sans-serif;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+    color: #fffefe;
+}
+
+.cart-active {
+    transform: translateX(0);
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+
+/* Dark-mode toggle button */
+
+#dark-mode-switch {
+    display: none; /* Hide the checkbox */
+}
+
+header .toggle-button {
+    display: inline-block;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end; /* Aligns the button to the right */
+    align-self: center; /* Aligns the button to the bottom */
+    width: 60px; /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
+    background-color: #ccc; /* Adjust as needed */
+    border-radius: 15px; /* Half of height to create a pill shape */
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button::before {
+    content: '';
+    display: block;
+    width: 30px; /* Half of .toggle-button's width */
+    height: 30px; /* Same as .toggle-button's height */
+    background-color: white; /* Adjust as needed */
+    border-radius: 50%; /* To create a circular shape */
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: left 0.3s ease;
+}
+
+#dark-mode-switch:checked + .toggle-button {
+    background-color: #4d4d4d; /* Adjust as needed */
+}
+
+#dark-mode-switch:checked + .toggle-button::before {
+    left: 30px; /* Move to the right when checked */
+}
+
+.toggle-button .sun, .toggle-button .moon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+}
+
+.toggle-button .sun {
+    left: 8px;
+}
+
+.toggle-button .moon {
+    right: 8px;
+}
+
+#dark-mode-switch:checked + .toggle-button .sun {
+    color: #000000;
+}
+
+#dark-mode-switch:checked + .toggle-button .moon {
+    color: #ffffff;
+}
+
+/* Chef section */
+
+section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+}
+
+.avatar{
+    grid-column: 1;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: 97px;
+    grid-template-rows: auto auto;
+}
+
+.avatar img {
+    grid-column: 1;
+    grid-row: 1/3;
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    align-self: center;
+}
+
+.avatar h3{
+    grid-column: 2;
+    grid-row: 1;
+    font-family: 'Port Lligat Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    color: #474747;
+    align-self: self-end;
+    padding: 0;
+    margin: 0;
+}
+
+.avatar h4{
+    grid-column: 2;
+    grid-row: 2;
+    font-family: 'Port Lligat Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 100;
+    color: #474747;
+    align-self: self-start;
+    padding: 0;
+    margin: 0;
+}
+
+.card {
+    width: 300px; /* Ensure card has enough space */
+    max-width: 100%; /* Ensure card does not exceed the width of its container */
+    display: block; /* Or flex, depending on layout requirements */
+    text-align: center;
+    font-family: 'Port Lligat Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    color: #474747;
+}
+
+/* Card function */
+
+.card img {
+    width: 400px; /* Explicit width */
+    max-width: none; /* Override any max-width that might be restricting size */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure it doesn't display inline which might bring in unwanted properties */
+}
+
+.card button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Menu section */
+
+article {
+    display: grid;
+    grid-template-columns: 215px 330px 655px; /* Ajout d'une troisième colonne pour les détails */
+    grid-template-rows: 20px 480px;
+    margin-top: 20px;
+    grid-gap: 20px; /* Ajouter un peu d'espace entre les colonnes */
+}
+
+article #dishDetails {
+    grid-column: 3; /* Placer les détails dans la troisième colonne */
+    /*border: 1px solid #ccc;*/
+    background-color: #F8F5ED; /* Assortir à la couleur de fond de body */
+    height: auto; /* Hauteur automatique basée sur le contenu */
+    overflow-y: auto; /* Activer le défilement si nécessaire */
+    margin-top: -120px;
+}
+
+article .filter{
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Port Lligat Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    color: #474747;
+}
+
+article .filter .filter_row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap : 8px;
+    font-family: 'Port Lligat Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 100;
+    color: #474747;
+    cursor: pointer;
+    transition: color 0.6s ease, font-weight 0.3s ease;
+    max-width: 170px;
+}
+
+article .filter .filter_row:hover {
+    color: #000000; /* Change the color to black on hover */
+    font-weight: bold; /* Make the font weight bold on hover */
+}
+
+article .food_menu{
+    grid-column: 2;
+    margin-top: -90px;
+    margin-left: 20px;
+    min-height: 650px;
+    max-width: 320px;
+    overflow-y: auto; /* Active le défilement vertical si le contenu dépasse la hauteur maximale */
+/*    border: 1px solid #ccc; Optionnel: pour montrer clairement les limites de la div */
+}
+
+article .titre_menu{
+    grid-column: 2;
+    grid-row: 1;
+    font-family: 'Panton Rust Heavy', sans-serif;
+    font-weight: 100;
+    align-self: self-end;
+    font-size: 30px;
+    margin-bottom: 80px;
+    margin-left: 20px;
+}
+
+/* Tablet devices (typically screens 768px and above but less than 1024px) */
+@media (max-width: 1024px) {
+    header {
+        display: grid;
+        grid-template-columns: 150px 1fr 440px;
+        grid-template-rows: 50px 1fr 1fr;
+        max-height: 150px;
+        justify-items: start;
+        align-self: center;
+    }
+
+    header .logo img {
+        width: 150px; /* Adjust the size of the logo */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    header h1, header h2 {
+        grid-column: 2/3;
+        font-size: 18px; /* Reduce the font size for better readability */
+        text-align: left;
+    }
+
+    .card img {
+        width: 300px; /* Smaller images in the card layout */
+    }
+
+    .avatar img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .avatar h3, .avatar h4 {
+        font-size: 16px; /* Adjust font size for avatar details */
+    }
+
+    article {
+        grid-template-columns: 100px 300px 300px; /* Adjust grid layout */
+    }
+
+    article .titre_menu{
+        grid-column: 2;
+        grid-row: 1;
+        font-family: 'Panton Rust Heavy', sans-serif;
+        font-weight: 100;
+        align-self: self-end;
+        font-size: 20px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+    }
+
+    article .food_menu{
+        grid-column: 2;
+        margin-top: 0px;
+        margin-left: 0px;
+        max-height: 590px; /* Ajustez selon l'espace que vous voulez allouer à l'affichage */
+        max-width: 320px;
+        overflow-y: auto; /* Active le défilement vertical si le contenu dépasse la hauteur maximale */
+        /*    border: 1px solid #ccc; Optionnel: pour montrer clairement les limites de la div */
+    }
+
+    .cart {
+        width: 50%; /* Narrower cart sidebar for tablets */
+    }
+}
+
+/* Mobile devices (typically screens less than 768px) */
+@media (max-width: 768px) {
+    body {
+        padding: 0 10px; /* Add padding to give some space on the edges */
+    }
+
+    header {
+        grid-template-columns: 120px 1fr; /* Simplify the header grid */
+        grid-template-rows: auto;
+    }
+
+    header .logo, header h1, header h2 {
+        text-align: center; /* Center align the text */
+    }
+
+    header .logo img {
+        width: 100px; /* Further reduce logo size */
+    }
+
+    header h1, header h2 {
+        font-size: 16px; /* Smaller text on mobile */
+    }
+
+    .card, .card img {
+        width: 100%; /* Make card and image full width */
+        max-width: 100%;
+    }
+
+    .avatar{
+        grid-column: 1;
+        grid-row: 3;
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+
+    .avatar img {
+        grid-column: 1;
+        grid-row: 1/3;
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        align-self: center;
+    }
+
+    .avatar h3{
+        grid-column: 2;
+        grid-row: 1;
+        font-family: 'Port Lligat Sans', sans-serif;
+        font-size: 20px;
+        font-weight: 100;
+        color: #474747;
+        align-self: self-end;
+        padding: 0;
+        margin: 0;
+    }
+
+    .avatar h4{
+        grid-column: 2;
+        grid-row: 2;
+        font-family: 'Port Lligat Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 100;
+        color: #474747;
+        align-self: self-start;
+        padding: 0;
+        margin: 0;
+    }
+
+    article {
+        grid-template-columns: 100px 300px 300px; /* Adjust grid layout */
+    }
+
+    .cart {
+        width: 50%; /* Full-width cart sidebar for mobile */
+        box-shadow: none; /* Optional: remove shadow for cleaner look */
+    }
+
+}
+
+/* Mobile devices (typically screens less than 768px) */
+@media (max-width: 375px) {
+
+    article {
+        grid-template-columns: 365px; /* Adjust grid layout */
+        grid-template-rows: 50px 20px auto;
+    }
+
+    article .filter{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .filter_row{
+        max-width: 375px;
+    }
+
+    .filter{
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .filter_row h4{
+        display: none;
+    }
+
+
+.card{
+    font-size: 14px;
+}
+
+    .card button {
+        margin-left: 1px;
+        padding: 1px 1px;
+        font-size: 11px;
+        margin-bottom: 0px;
+    }
+
+    article .titre_menu{
+        grid-column: 1;
+        grid-row: 2;
+        font-family: 'Panton Rust Heavy', sans-serif;
+        font-weight: 100;
+        align-self: self-end;
+        font-size: 20px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+    }
+
+    article .food_menu{
+        grid-column: 1;
+        grid-row: 3;
+        align-self: center;
+        align-items: center;
+        align-content: center;
+        min-height: 300px;
+        max-width: 365px;
+        overflow-y: auto; /* Active le défilement vertical si le contenu dépasse la hauteur maximale */
+    }
+
+    .cart {
+        width: 50%; /* Full-width cart sidebar for mobile */
+        box-shadow: none; /* Optional: remove shadow for cleaner look */
+    }
+
+    .toggle-button, .toggle-button::before {
+        width: 50px; /* Adjust toggle button size */
+    }
+
+    article{
+        grid-template-columns: 2fr;
+    }
+
+    .food_menu #dishes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Creates two columns of equal width */
+        grid-gap: 50px; /* Adjusts the gap between the grid items */
+        margin: 0;
+        padding: 0;
+    }
+
+    .dishes img {
+        width: 100%; /* Ensures images scale within their container */
+        height: auto; /* Maintains aspect ratio */
+    }
+
+    article #dishDetails{
+        grid-column: 1/2;
+        grid-row: 4;
+        margin-top: 0px;
+    }
+
+    header .toggle-button {
+        display: inline-block;
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: end; /* Aligns the button to the right */
+        align-self: center; /* Aligns the button to the bottom */
+        width: 60px; /* Adjust as needed */
+        height: 30px; /* Adjust as needed */
+        background-color: #ccc; /* Adjust as needed */
+        border-radius: 15px; /* Half of height to create a pill shape */
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .toggle-button::before {
+        content: '';
+        display: block;
+        width: 30px; /* Half of .toggle-button's width */
+        height: 30px; /* Same as .toggle-button's height */
+        background-color: white; /* Adjust as needed */
+        border-radius: 50%; /* To create a circular shape */
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: left 0.3s ease;
+    }
+
+    #dark-mode-switch:checked + .toggle-button {
+        background-color: #4d4d4d; /* Adjust as needed */
+    }
+
+    #dark-mode-switch:checked + .toggle-button::before {
+        left: 30px; /* Move to the right when checked */
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
